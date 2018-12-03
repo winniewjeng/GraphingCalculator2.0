@@ -9,6 +9,9 @@
 #ifndef Constants_hpp
 #define Constants_hpp
 
-#include <stdio.h>
+int const TOKEN = -1;
+int const OPERATOR = 0;
+int const OPERAND = 1;
+int const VARIABLE = 2;
 
 #endif /* Constants_hpp */
