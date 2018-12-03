@@ -36,7 +36,7 @@ Queue<Token*> toToken(string expression) {
         
     }
     return infix;
-};
+}
 
 // turn the infix to postfix
 Queue<Token*> toPostFix(Queue<Token*> infix) {
@@ -44,10 +44,11 @@ Queue<Token*> toPostFix(Queue<Token*> infix) {
     Queue<Token*> postfix;
     // get an operator stack
     Stack<Operator*> optr;
+    
+    Token* prev_item = new Operator("P");  // initialize prev_item to something ridiculous
     while (!infix.empty()) {
         //pop infix queue one item one at a time
         Token* item = infix.pop();
-        Token* prev_item = new Operator("P");  // initialize it to something ridiculous
         // if the item is a number, push it to postfix
         if (item->get_type() == OPERAND) {
             postfix.push(item);
@@ -58,7 +59,6 @@ Queue<Token*> toPostFix(Queue<Token*> infix) {
         else if (item->get_type() == VARIABLE) {
             postfix.push(item);
             if (prev_item->get_type() == OPERAND) {
-                cout << "do i star\n";
                 // if its previous item is number, create a ghost * and put it in postfix
                 postfix.push(new Operator("*"));
             }
@@ -136,6 +136,46 @@ Queue<Token*> toPostFix(Queue<Token*> infix) {
     return postfix;
 }
 
+double Eval(Queue<Token*> postfix, double var_num) {
+    //a stack that stores double* Operands
+    Stack<double> eval_stack;
+    
+    while (!postfix.empty()) {
+        //get the top Token* in the postfix queue
+        Token* tok = postfix.pop();
+        cout << "the token in question is " << tok << endl;
+        
+        if (tok->get_type() == VARIABLE) {
+            //push var_num into the eval_stack in lieu of the variable token
+            eval_stack.push(var_num);
+        } else if (tok->get_type() == OPERAND) {
+            //cast token to operand type
+            Operand* oprnd = static_cast<Operand*>(tok);
+            //get oprnd value and push it into eval_stack
+            eval_stack.push(oprnd->get_num());
+        } else if (tok->get_type() == OPERATOR) {
+            //cast token to operator type
+            Operator* optr = static_cast<Operator*>(tok);
+            //we'll be doing some calculation so get a result variable to store
+            double result;
+            
+            //if operator is not trig, get a LHS and RHS from the eval stack
+            if (optr->is_trig() == false) {
+                double RHS = eval_stack.pop();
+                double LHS = eval_stack.pop();
+                result = optr->calculate(LHS, RHS);
+            }
+            // if operator is trig
+            else {
+                double rad = eval_stack.pop();
+                result = optr->calculate(rad);
+            }
+            //push the result to the eval stack
+            eval_stack.push(result);
+        }
+    }
+    return eval_stack.top();
+}
 //double Eval(Queue<Token*> postfix) {
 //    //a stack that stores double* Operands
 //    Stack<double> s;
@@ -235,5 +275,5 @@ void test_shunting() {
     cout << "Tokenized infix expression is   " << infix << endl;
     Queue<Token*> postfix = toPostFix(infix);
     cout << "Tokenized postfix expression is " << postfix << endl;
-    //    cout << "the evaluated postfix expression is " << Eval(postfix) << endl;
+    cout << "the evaluated postfix expression is " << Eval(postfix, 2) << endl;
 };

@@ -19,9 +19,6 @@ public:
     }
     virtual string get_symb() {return "";}
     virtual int get_type() {return 2;}
-//    virtual int precedence_order() {return -1;}
-//    virtual string get_
-    
     
 private:
 };
