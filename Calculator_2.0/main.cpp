@@ -11,10 +11,9 @@ using namespace std;
 
 int main(int, char const**)
 {
-    Interface p;
-    p.run();
-//    run();
-
-//    test_shunxting();
+//    Interface p;
+//    p.run();
+////    run();
+    test_shunting();
     return 0;
 }

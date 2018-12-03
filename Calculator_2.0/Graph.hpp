@@ -12,6 +12,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Constants.hpp"
+#include "ResourcePath.hpp"
 
 using namespace std;
 class Graph {

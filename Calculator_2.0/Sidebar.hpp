@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include "Constants.hpp"
+#include "ResourcePath.hpp"
 using namespace std;
 class Sidebar {
 public:
