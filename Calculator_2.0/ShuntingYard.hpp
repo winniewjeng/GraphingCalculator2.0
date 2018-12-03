@@ -17,15 +17,12 @@
 
 //parse the user-input string into tokens and store them in queue
 Queue<Token*> toToken(string expression);
-////convert the infix queue to a post-fix queue using Shunting-Yard algorithm
+//convert the infix queue to a post-fix queue using Shunting-Yard algorithm
 Queue<Token*> toPostFix(Queue<Token*> infix);
-//
-////needs fixing: account for variable
-//double Eval(Queue<Token*> postfix);
-//
-////needs fixing: account for variable
-//double Eval(Queue<Token*> postfix, Variable var);
-//
+
+//evaluate the postfix queue
+double Eval(Queue<Token*> postfix, double var_num);
+
 //void test_eval();
 void test_shunting();
 

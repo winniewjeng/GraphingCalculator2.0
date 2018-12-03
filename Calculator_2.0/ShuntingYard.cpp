@@ -143,7 +143,6 @@ double Eval(Queue<Token*> postfix, double var_num) {
     while (!postfix.empty()) {
         //get the top Token* in the postfix queue
         Token* tok = postfix.pop();
-        cout << "the token in question is " << tok << endl;
         
         if (tok->get_type() == VARIABLE) {
             //push var_num into the eval_stack in lieu of the variable token
@@ -176,85 +175,13 @@ double Eval(Queue<Token*> postfix, double var_num) {
     }
     return eval_stack.top();
 }
-//double Eval(Queue<Token*> postfix) {
-//    //a stack that stores double* Operands
-//    Stack<double> s;
-//
-//    while (!postfix.empty()) {
-//        //get the top Token* in the queue
-//        Token* p = postfix.top();
-//        //cout << p << " ";
-//        double LHS;
-//        double RHS;
-//        // if Token* is of type Operand(0), i.e. number digit, push into stack
-//        // if Token* is of type Operator(1), pop stack twice and do the math
-//        if (p->get_type() == 0) {
-//            // cast the Token* p to Operand*
-//            Operand* token_num = static_cast<Operand*>(p);
-//            // get the value that Operand* holds
-//            double num = token_num->get_num();
-//            // push the value into stack
-//            s.push(num);
-//        } else {
-//            // get two numbers from stack
-//            RHS = s.pop();
-//            LHS = s.pop();
-//            // do math with the numbers
-//            double result = static_cast<Operator*>(p)->do_math(LHS, RHS);
-//            // push result back into the stack
-//            s.push(result);
-//        }
-//        // house keeping - shrink the postfix queue
-//        postfix.pop();
-//    }
-//
-//    return s.top();
-//};
-//
-//double Eval(Queue<Token*> postfix, Variable var) {
-//
-//    Stack<double> s;
-//
-//    while(!postfix.empty()) {
-//        Token* p = postfix.top();
-//        cout << "p is " << p << endl;
-//        double LHS;
-//        double RHS;
-//        // if Token* is of type Operand(0), i.e. number digit, push into stack
-//        if (p->get_type() == 0) {
-//            // cast the Token* p to Operand*
-//            Operand* token_num = static_cast<Operand*>(p);
-//            // get the value that Operand* holds
-//            double num = token_num->get_num();
-//            // push the value into stack
-//            s.push(num);
-//        }
-//        // if Token* is of type Operator(1), pop stack twice and do the math
-//        else if (p->get_type() == 1) {
-//            // get two numbers from stack
-//            RHS = s.pop();
-//            LHS = s.pop();
-//            // do math with the numbers
-//            double result = static_cast<Operator*>(p)->do_math(LHS, RHS);
-//            // push result back into the stack
-//            s.push(result);
-//        }
-//        // if Token* is of type Variable(2)
-//        else if (p->get_type() == 2) {
-//
-//        }
-//        // house keeping - shrink the postfix queue
-//        postfix.pop();
-//    }
-//    return s.top();
-//}
-//
+
 //void test_eval() {
 //
 //    Queue<Token*> input;
 //
 //    input.push(new Operand(3.0));
-//    input.push(new Operand(2));
+//    input.push(new Variable("X"));
 //    input.push(new Operand(5.5));
 //    input.push(new Operator("+"));
 //    input.push(new Operand(4));
@@ -262,7 +189,7 @@ double Eval(Queue<Token*> postfix, double var_num) {
 //    input.push(new Operator("*"));
 //
 //    cout << "Evaluate: " << endl;
-//    cout << input << " = " << Eval(input) << endl;
+//    cout << input << " = " << Eval(input, 1) << endl;
 //};
 //
 void test_shunting() {
@@ -275,5 +202,5 @@ void test_shunting() {
     cout << "Tokenized infix expression is   " << infix << endl;
     Queue<Token*> postfix = toPostFix(infix);
     cout << "Tokenized postfix expression is " << postfix << endl;
-    cout << "the evaluated postfix expression is " << Eval(postfix, 2) << endl;
+    cout << "Evaluated postfix expression is " << Eval(postfix, 2) << endl;
 };

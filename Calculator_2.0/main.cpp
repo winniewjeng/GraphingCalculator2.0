@@ -3,11 +3,18 @@
 #include "ShuntingYard.hpp"
 #include <iostream>
 #include <string>
+#include "Interface.hpp"
+//#include <SFML/Graphics.hpp>
+
 
 using namespace std;
 
 int main(int, char const**)
 {
-    test_shunting();
+    Interface p;
+    p.run();
+//    run();
+
+//    test_shunxting();
     return 0;
 }

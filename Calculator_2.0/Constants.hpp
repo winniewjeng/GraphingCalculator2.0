@@ -9,9 +9,14 @@
 #ifndef Constants_hpp
 #define Constants_hpp
 
-int const TOKEN = -1;
-int const OPERATOR = 0;
-int const OPERAND = 1;
-int const VARIABLE = 2;
+const int TOKEN = -1;
+const int OPERATOR = 0;
+const int OPERAND = 1;
+const int VARIABLE = 2;
+
+const float WINDOW_WIDTH = 2100;
+const float WINDOW_HEIGHT = 1200;
+const float GRAPH_PANEL = WINDOW_WIDTH*4/5;
+const float SIDE_BAR = WINDOW_HEIGHT*1/5;
 
 #endif /* Constants_hpp */
